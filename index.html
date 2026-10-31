@@ -31,10 +31,10 @@
                 alert("Please fill in both the title and code fields");
                 return;
             }
-            const snippet = { title, code, date: new data().toLocalDataString() };
+            const snippet = { title, code, date: new Date().toLocalDataString() };
             let snippets = JSON.parse(localStorage.getItem("neonSnippets")) || [];
             snippets.unshift(snippet);
-            localStorage.setItem("neonsnippets", JSOn.stringify(snippets));
+            localStorage.setItem("neonSnippets", JSON.stringify(snippets));
             document.getElementById("snippetTitle").value = "";
             document.getElementById("snippetCode").value = "";
             loadSnippets();
