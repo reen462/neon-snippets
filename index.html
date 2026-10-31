@@ -46,7 +46,7 @@
             let snippets = JSON.parse(localStorage.getItem("neonSnippets")) || [];
 
             if (snippets.length === 0) {
-                grid.innerHTML =`<p class="empty-msg">Vault is empty. Add yoyr first snippet above.</p>`;
+                grid.innerHTML =`<p class="empty-msg">Vault is empty. Add your first snippet above.</p>`;
                 return;
             }
             snippets.forEach((item, index) => {
