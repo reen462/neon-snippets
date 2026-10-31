@@ -1,0 +1,81 @@
+cat << 'EOf'> index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Snippet Vault</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1> NEON VAULT</h1>
+            <p>Your personal cyberpunk code & concept tracker</p>
+        </header>
+        <div class="form-card">
+            <input type="text" id="snippetTitle" placeholder="Snippet Ttile (e.g., Git Push Command)">
+            <textarea id="snippetCode" placeholder="Paste your code or notes here..."></textarea>
+            <button onclick="saveSnippet()">Save to Vault</button>
+        </div>
+        <div class="vault-grid" id="vaultGrid">
+            <!--Saved snippets will pop here dynamically-->
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", loadSnippets);
+        function saveSnippet() {
+            const title = document.getElementById("snippetTitle").value.trim();
+            const code = document.getElementById("snippetCode").value.trim();
+            if (!title || !code) {
+                alert("Fill out both fields, hacker!");
+                return;
+            }
+            const snippet = { title, code, date: new Data().toLocalDataString() };
+            let snippets = JSON.parse(localStorage.getItem("neonSnippets")) || [];
+            snippets.unshift(snippet);
+            localStorage.setItem("neonsnippets", JSOn.stringify(snippets));
+            document.getElementById("snippetTitle").value = "";
+            document.getElementById("snippetCode").value = "";
+            loadSnippets();
+        }
+        function loadSnippets() {
+            const grid = document.getElementById("vaultGrid");
+            grid.innerHTML = "";
+
+            let snippets = JSON.parse(localStorage.getItem("neonSnippets")) || [];
+
+            if (snippets.length === 0) {
+                grif.innerHTML =`<p class="empty-msg">Vault is empty. Add yoyr first snippet above.</p>`;
+                return;
+            }
+            snippets.forEach((item, index) => {
+                const card = document.createElement("div");
+                card.className = "snippet-card";
+                card.innerHTML =`
+                <div class ="card-header">
+                    <h3>${item.title}</h3>         
+                    <button onclick="deleteSnippet(${index})" class="de-btn">x<, </button>
+                    </div>
+                    <pre><code>${escapeHtml(item.code)}</code></pre>
+                    <span class ="date">${item.date}</span>
+                    `;
+                    grid.appendChild(card);
+                 });
+                function deleteSnippet(index) {
+                    let snippets = JSON.parse(localStorage.getItem("neonSnippets")) || [];
+            snippets.splice(index, 1);
+            localStorage.setItem("neonsnippets", JSOn.stringify(snippets));
+            loadSnippets();
+                }
+                function escapeHtml(text) {
+                    return text.replace(/&/g, "&amp;").replace(/&/g, "&lt;").replace(/&/g, "&gt;");
+                }
+            
+        }
+
+    </script>
+    
+</body>
+</html>
+EOF
