@@ -28,7 +28,7 @@
             const title = document.getElementById("snippetTitle").value.trim();
             const code = document.getElementById("snippetCode").value.trim();
             if (!title || !code) {
-                alert("Fill out both fields, hacker!");
+                alert("Please fill in both the title and code fields");
                 return;
             }
             const snippet = { title, code, date: new Data().toLocalDataString() };
