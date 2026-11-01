@@ -55,24 +55,23 @@
                 card.innerHTML =`
                 <div class ="card-header">
                     <h3>${item.title}</h3>         
-                    <button onclick="deleteSnippet(${index})" class="de-btn">x<, </button>
+                    <button onclick="deleteSnippet(${index})" class="de-btn">Delete</button>
                     </div>
                     <pre><code>${escapeHtml(item.code)}</code></pre>
                     <span class ="date">${item.date}</span>
                     `;
                     grid.appendChild(card);
                  });
-                function deleteSnippet(index) {
+        }
+         function deleteSnippet(index) {
                     let snippets = JSON.parse(localStorage.getItem("neonSnippets")) || [];
             snippets.splice(index, 1);
-            localStorage.setItem("neonsnippets", JSOn.stringify(snippets));
+            localStorage.setItem("neonSnippets", JSON.stringify(snippets));
             loadSnippets();
                 }
                 function escapeHtml(text) {
                     return text.replace(/&/g, "&amp;").replace(/&/g, "&lt;").replace(/&/g, "&gt;");
                 }
-            
-        }
 
     </script>
     
